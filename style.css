@@ -1,0 +1,123 @@
+/* 基本のスタイル */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* 画面の高さを100%に */
+  margin: 0;
+  padding: 0;
+  background-color: #dbd6d6;  
+  overflow: hidden;
+}
+
+.container {
+  text-align: center;
+  position: relative; /* 子要素の位置を相対的にする */
+  margin: 0;
+  padding: 0; /* 上、右、下、左のpadding */
+  background-color: #dbd6d6; /* コンテナの背景色 */
+  position: relative;
+}
+
+.video-container {
+}
+
+video {
+  position: fixed; /*画面に対して固定位置にする*/
+  left: 0%;
+  transform: translateX(-11.5%);
+  width: 100vw;
+  height: 100vh; /* 動画の高さを75vhに */
+  overflow: hidden;
+  z-index: 0;
+}
+
+.timer {
+  position: fixed; /*画面に対して固定位置にする*/
+  top: 10vh; /* 上からの位置 */
+  left: 6vw; /* 左からの位置 */
+  font-size: 20vmin; /* フォントサイズ */
+  color: #ffffff; /* タイマーの文字色 */
+  height: 20vh;
+  width: auto;
+  background-color: rgba(0, 0, 0, 0.34);
+  z-index: 100;
+  line-height: 19vh; /* height と同じ値を指定 */
+  text-align: center; /* 水平方向中央寄せ */
+}
+
+.timer.almost-over {
+  color: #f8313eee  
+}
+
+.button-container {
+  position: fixed; /* 画面に対して固定位置にする */
+  top: 8%;
+  right: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-button {
+  background-color: #156082; /* ボタンの背景色 */
+  color: white; /* ボタンの文字色 */
+  border: none; /* ボーダーを無しに */
+  font-size: 3vh; /* フォントサイズ */
+  text-align: left;
+  margin-bottom:6vh;
+  width: 13.5vw;
+  padding: 1.2vh 0 1.2vh 1.9vw; /* ボタンの内側の余白 */
+  border-radius: 10px 0px 0px 10px; /* ボタンの角を丸くする */
+  cursor: pointer; /* カーソルをポインタに */
+}
+
+.input-container{
+  display: flex;
+  margin-bottom: 6vh;
+  padding: 0;
+}
+
+.set-minutes {
+  background-color: #156082; /* 入力欄の背景色 */
+  color: white; /* ボタンの文字色 */
+  border: none; /* ボーダーを無しに */
+  font-size: 3vh; /* フォントサイズ */
+  margin: 0 1vw 0 0;
+  width: 4vw;
+  justify-self: start;
+  padding: 1.2vh 0.3vw 1.2vh 1.5vw; /* ボタンの内側の余白 */
+  border-radius: 10px 10px 10px 10px; /* ボタンの角を丸くする */
+  cursor: pointer; /* カーソルをポインタに */
+}
+
+.minutes {
+  margin: 1vh 1.3vw 0 0;
+  align-self: end;
+  text-align: center;
+  font-size: 3vh; /* フォントサイズ */
+  color: #156082; /* フォントの色変更 */
+}
+
+.set-button {
+  text-align: center;
+  align-self: end;
+  width: 2.5vw;
+  height: 3vh;
+  font-size: 1.5vh; /* フォントサイズ */
+  margin: 0;
+  padding: 0; /* ボタンの内側の余白 */
+}
+
+.start-button {
+  display: block; /* スタートボタンをブロック要素に */
+  background-color: #156082; /* スタートボタンの背景色 */
+  color: white; /* スタートボタンの文字色 */
+  border: none; /* ボーダーを無しに */
+  font-size: 3vh; /* フォントサイズ */
+  text-align: left;
+  margin-bottom:6vh;
+  width: 13.5vw;
+  padding: 1.2vh 0 1.2vh 1.9vw; /* ボタンの内側の余白 */
+  border-radius: 10px 0px 0px 10px; /* ボタンの角を丸くする */
+  cursor: pointer; /* カーソルをポインタに */
+}
