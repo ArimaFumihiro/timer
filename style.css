@@ -122,13 +122,21 @@ video {
   cursor: pointer; /* カーソルをポインタに */
 }
 
+.toggle-container {
+  position: fixed;
+  right: 0%;
+  bottom: 0%;
+  display: flex;
+  text-align: center;
+  align-items: end;
+}
+
 label {
   color: #333333;
   display: inline-flex; /* ラベル内の要素を横並びにする */
   align-items: center; /* 縦方向中央揃え */
-  margin-bottom: 10px; /* ラベル間の余白 */
+  margin: 0 1vw 2vh 0;
   font-size: 1.5vh; /* ラベルのフォントサイズ */
-  margin-right: 1vw;
 }
 
 .toggleSE {
