@@ -131,12 +131,21 @@ video {
   align-items: end;
 }
 
+.se {
+  align-self: center;
+  color: #333333;
+  font-size: 1.5vh;
+  margin: 0 1vw 10px 0;
+  padding: 0;
+}
+
 label {
   color: #333333;
   display: inline-flex; /* ラベル内の要素を横並びにする */
   align-items: center; /* 縦方向中央揃え */
-  margin: 0 1vw 2vh 0;
+  margin-bottom: 10px; /* ラベル間の余白 */
   font-size: 1.5vh; /* ラベルのフォントサイズ */
+  margin-right: 1vw;
 }
 
 .toggleSE {
@@ -144,8 +153,8 @@ label {
   background-color: #b5b1b1;
   text-align: center;
   font-size: 1.3vh;
-  width: 2vw; /* チェックボックスの幅 */
-  height: 2.5vh; /* チェックボックスの高さ */
-  margin-left: 0.4vw; /* チェックボックスとラベルテキストの間の余白 */
-  border-radius: 10px;
+  width: 2vw; /* ボタンの幅 */
+  height: 2.5vh; /* ボタンボタンの高さ */
+  margin-left: 0.4vw; /* ボタンとラベルテキストの間の余白 */
+  border-radius: 5px;
 }
