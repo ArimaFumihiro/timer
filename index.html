@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>タイマー</title>
+</head>
+<body>
+  <div class="container">
+    <div class="video-container">
+      <div class="timer" id="timer">09:50</div> <!-- タイマー表示 -->
+        <video id="video" loop muted preload>
+          <source src="./シーケンス 01_2.mp4" type="video/mp4"> <!-- 動画ファイルのパスを指定 -->
+          お使いのブラウザは動画タグに対応していません。
+        </video>
+      </div>
+      <div class="button-container">
+        <button type="button" class="menu-button" id="minutes-button1" data-value="900">15分</button></br>
+        <button type="button" class="menu-button" id="minutes-button2" data-value="600">10分</button></br>
+        <button type="button" class="menu-button" id="minutes-button3" data-value="300"> 5分</button></br>
+        <button type="button" class="menu-button" id="minutes-button4" data-value="60"> 1分</button></br>
+        <div class="input-container">
+          <input type="number" class="set-minutes" name="number" id="set-minutes"><p class="minutes">分</p>
+          <button type="button" class="set-button" id="set-button">set</button></br>
+        </div>
+        <button type="button" class="menu-button" id="setBreak">Break Time</button>
+        <button type="button" class="start-button" id="start-button">STRAT</button>
+      </div>
+      <audio id="bgm"></audio>
+      <audio id="se"></audio>
+      <audio id="se_river" src="./relaxing-mountains-rivers-streams-running-water-18178.mp3" loop></audio>
+      <audio id="se_bard" src="./birds-chirping-04-6771.mp3" loop></audio>
+  </div>
+
+  <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
