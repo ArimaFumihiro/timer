@@ -6,6 +6,7 @@ let countdownStartedByButton = false; // スタートボタンで開始された
 let lastTickSecond = -1; // 前回「tick」を再生した秒数を記録
 let playedTracks = [];
 let currentTrackIndex = -1;
+let seOn = true;
 
 const timerDisplay = document.getElementById('timer'); //タイマー表示ディスプレイ
 const minutesButton1 = document.getElementById('minutes-button1'); //時間指定ボタン１
@@ -21,6 +22,8 @@ const bgmElement = document.getElementById('bgm'); // BGM要素を取得
 const seElement = document.getElementById('se'); // SE鳥の要素を取得
 const seRiverElement = document.getElementById('se_river'); // SE川の要素を取得
 const seBardElement = document.getElementById('se_bard'); // SE鳥の要素を取得
+const toggleSe = document.getElementById('toggleSE'); //SE切り替えボタンの要素を取得
+
 
 //BGM
 const bgmTracks = [
@@ -280,3 +283,31 @@ function toggleFullScreen() {
     document.exitFullscreen();
   }
 }
+
+//SEのON,OFF
+toggleSe.addEventListener('click', () => {
+  seOn = !seOn; // seOn の値を反転させる (true なら false に、false なら true)
+  if (seOn === false) {
+    toggleSe.innerText = 'off';
+    fadeOutAudioElement(seRiverElement);
+    fadeOutAudioElement(seBardElement);    
+  } else {
+    toggleSe.innerText = 'on';
+    toggleSe.style.fontSize = '1.5vh';
+  }
+
+  if (countdownInterval && seOn === true) {    
+    // 川の音をループ再生開始
+    seRiverElement.play().catch(error => {
+      console.error('BGM再生エラー:', error);
+    });
+    seRiverElement.volume = 0.3;
+    seRiverElement.loop = true;
+    // 鳥の音をループ再生開始
+    seBardElement.play().catch(error => {
+      console.error('BGM再生エラー:', error);
+    });
+    seBardElement.volume = 0.3;
+    seBardElement.loop = true;
+  }
+});
