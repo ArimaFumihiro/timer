@@ -306,7 +306,7 @@ function changeover(toggle, boolean, vol, audioElement) {
 //森の音を再生する関数
 function forestSounds(audioElement, toggle, vol) {
   if (toggle === true) {
-    audioElement.volume = 0.3;
+    audioElement.volume = vol;
     audioElement.play().catch(error => console.error('BGM再生エラー:', error));
     audioElement.loop = true;
   }
