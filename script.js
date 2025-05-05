@@ -185,12 +185,11 @@ function startCountdown() {
 
 //休憩時間をセットする
 function breakTime() {
-  // カウントダウンが動作中の場合は停止する
+  // すでにタイマーが動いている場合は何もしない
   if (countdownInterval) {
-    clearInterval(countdownInterval);
-    countdownInterval = null;
-    countdownStartedByButton = false;
+    return;
   }
+  
   totalSeconds = 590;
   updateDisplay();
   countdownStartedByButton = false;
