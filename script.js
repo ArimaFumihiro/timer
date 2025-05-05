@@ -24,21 +24,21 @@ const seBardElement = document.getElementById('se_bard'); // SE鳥の要素を�
 
 //BGM
 const bgmTracks = [
-  './BGM/Cozy_break_time.mp3',
-  './BGM/ix27m-not-feeling-well-today-230792.mp3',
-  './BGM/jazz-at-dizzyx27s-303230.mp3',
-  './BGM/Komorebi_Cafe.mp3',
-  './BGM/sparkling-glasses-and-nocturnal-tunes-smooth-jazz-piano-314053.mp3',
-  './BGM/un_cafe.mp3',
-  './BGM/海辺のステップ.mp3',
-  './BGM/路地裏の純喫茶.mp3'
+  './Cozy_break_time.mp3',
+  './ix27m-not-feeling-well-today-230792.mp3',
+  './jazz-at-dizzyx27s-303230.mp3',
+  './Komorebi_Cafe.mp3',
+  './sparkling-glasses-and-nocturnal-tunes-smooth-jazz-piano-314053.mp3',
+  './un_cafe.mp3',
+  './海辺のステップ.mp3',
+  './路地裏の純喫茶.mp3'
 ];
 
 //SE
 const seAlarmTracks = {
-  'buttonClick': './SE/button_click.mp3',
-  'timerEnd': './SE/timer_end.mp3',
-  'tick': './SE/tick.mp3' // 「ピッ」というSEのパス
+  'buttonClick': './button_click.mp3',
+  'timerEnd': './timer_end.mp3',
+  'tick': './tick.mp3' // 「ピッ」というSEのパス
 };
 
 //SEを鳴らす関数
