@@ -6,7 +6,11 @@ let countdownStartedByButton = false; // スタートボタンで開始された
 let lastTickSecond = -1; // 前回「tick」を再生した秒数を記録
 let playedTracks = [];
 let currentTrackIndex = -1;
-let seOn = true;
+let riverOn = true;
+let bardOn = true;
+let bgmVolume = 0.2;
+let riverVolume = 0.3;
+let bardVolume = 0.2;
 
 const timerDisplay = document.getElementById('timer'); //タイマー表示ディスプレイ
 const minutesButton1 = document.getElementById('minutes-button1'); //時間指定ボタン１
@@ -22,7 +26,8 @@ const bgmElement = document.getElementById('bgm'); // BGM要素を取得
 const seElement = document.getElementById('se'); // SE鳥の要素を取得
 const seRiverElement = document.getElementById('se_river'); // SE川の要素を取得
 const seBardElement = document.getElementById('se_bard'); // SE鳥の要素を取得
-const toggleSe = document.getElementById('toggleSE'); //SE切り替えボタンの要素を取得
+const toggleRiver = document.getElementById('toggle-river-SE'); //SE切り替えボタンの要素を取得
+const toggleBard = document.getElementById('toggle-bard-SE'); //SE切り替えボタンの要素を取得
 
 
 //BGM
@@ -70,7 +75,7 @@ function playRandomBGM() {
   currentTrackIndex = randomIndex;
   const selectedTrack = bgmTracks[currentTrackIndex];
 
-  bgmElement.volume = 0.2;
+  bgmElement.volume = bgmVolume;
   bgmElement.src = selectedTrack;
   bgmElement.play().catch(error => {
     console.error('BGM再生エラー:', error);
@@ -82,6 +87,8 @@ function playRandomBGM() {
     playedTracks = []; // 全ての曲を再生したら履歴をリセット
   }
 }
+
+
 
 const FADE_OUT_DURATION = 2000; // フェードアウトの時間 (ミリ秒)
 
@@ -188,30 +195,17 @@ function startCountdown() {
 
 //休憩時間をセットする
 function breakTime() {
-  // すでにタイマーが動いている場合は何もしない
   if (countdownInterval) {
     return;
   }
-  
+ 
   totalSeconds = 590;
   updateDisplay();
   countdownStartedByButton = false;
   startCountdown();
   playRandomBGM(); // 休憩時間開始時にBGMを再生
-
-  // 川の音をループ再生開始
-  seRiverElement.play().catch(error => {
-    console.error('BGM再生エラー:', error);
-  });
-  seRiverElement.volume = 0.3;
-  seRiverElement.loop = true;
-
-  // 鳥の音をループ再生開始
-  seBardElement.play().catch(error => {
-    console.error('BGM再生エラー:', error);
-  });
-  seBardElement.volume = 0.3;
-  seBardElement.loop = true;
+  forestSounds(seRiverElement, riverOn, riverVolume); //川の音をvolume0.3で再生
+  forestSounds(seBardElement, bardOn, bardVolume); //鳥の音をvolume0.3で再生
 }
 
 function fixedTime(e) {
@@ -267,9 +261,9 @@ updateDisplay();
 
 //フルスクリーン
 document.addEventListener(
-  "keydown",
+  'keydown',
   (e) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       toggleFullScreen();
     }
   },
@@ -284,30 +278,36 @@ function toggleFullScreen() {
   }
 }
 
-//SEのON,OFF
-toggleSe.addEventListener('click', () => {
-  seOn = !seOn; // seOn の値を反転させる (true なら false に、false なら true)
-  if (seOn === false) {
-    toggleSe.innerText = 'off';
-    fadeOutAudioElement(seRiverElement);
-    fadeOutAudioElement(seBardElement);    
-  } else {
-    toggleSe.innerText = 'on';
-    toggleSe.style.fontSize = '1.5vh';
-  }
-
-  if (countdownInterval && seOn === true) {    
-    // 川の音をループ再生開始
-    seRiverElement.play().catch(error => {
-      console.error('BGM再生エラー:', error);
-    });
-    seRiverElement.volume = 0.3;
-    seRiverElement.loop = true;
-    // 鳥の音をループ再生開始
-    seBardElement.play().catch(error => {
-      console.error('BGM再生エラー:', error);
-    });
-    seBardElement.volume = 0.3;
-    seBardElement.loop = true;
-  }
+//川の音をON,OFF
+toggleRiver.addEventListener('click', () => {
+  riverOn = changeover(toggleRiver, riverOn, riverVolume, seRiverElement);
 });
+//鳥の音をON,OFF
+toggleBard.addEventListener('click', () => {
+  bardOn = changeover(toggleBard, bardOn, bardVolume, seBardElement);
+});
+
+//森の音をON,OFFする関数
+function changeover(toggle, boolean, vol, audioElement) {
+  boolean = !boolean; // ローカル変数 boolean を反転
+  if (boolean === false) {
+    toggle.innerText = 'off';
+    fadeOutAudioElement(audioElement);  
+  } else {
+    toggle.innerText = 'on';
+    toggle.style.fontSize = '1.5vh';
+  }
+  if (countdownInterval) {    
+    forestSounds(audioElement, boolean, vol);
+  }
+  return boolean
+}
+
+//森の音を再生する関数
+function forestSounds(audioElement, toggle, vol) {
+  if (toggle === true) {
+    audioElement.volume = 0.3;
+    audioElement.play().catch(error => console.error('BGM再生エラー:', error));
+    audioElement.loop = true;
+  }
+}
