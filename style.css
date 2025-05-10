@@ -157,7 +157,7 @@ label {
   line-height: 2.5vh;
   margin: 0 0 0 0.3vw; /* ボタンとラベルテキストの間の余白 */
   padding: 0;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .togglebutton:hover {
