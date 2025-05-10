@@ -39,7 +39,12 @@ const bgmTracks = [
   './sparkling-glasses-and-nocturnal-tunes-smooth-jazz-piano-314053.mp3',
   './un_cafe.mp3',
   './海辺のステップ.mp3',
-  './路地裏の純喫茶.mp3'
+  './路地裏の純喫茶.mp3',
+  './Starlight_Cafe.mp3',
+  './sensual-jazz.mp3',
+  './lofi-chill-jazz.mp3',
+  './lofi.mp3',
+  './cafe-music.mp3'
 ];
 
 //SE
