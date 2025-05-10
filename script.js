@@ -175,7 +175,7 @@ function startCountdown() {
     if (totalSeconds <= 0) {
       clearInterval(countdownInterval);
       countdownInterval = null;
-      timerDisplay.textContent = '00:00';
+      timerDisplay.textContent = '10:00';
       console.log('タイマー終了！');
       if (countdownStartedByButton) { // スタートボタンで開始された場合のみ終了SEを再生
         playSE('timerEnd');
