@@ -1,7 +1,7 @@
 'use strict'
 
 let countdownInterval; // setInterval の ID を保持
-let totalSeconds = 60;
+let totalSeconds = 600;
 let countdownStartedByButton = false; // スタートボタンで開始されたかどうかのフラグ
 let lastTickSecond = -1; // 前回「tick」を再生した秒数を記録
 let playedTracks = [];
@@ -260,7 +260,7 @@ breakButton.addEventListener('click', () => {
 // BGMの再生終了時に次の曲を再生するイベントリスナー
 bgmElement.addEventListener('ended', playRandomBGM);
 
-// ページ読み込み時に初期表示を 00:00 に設定
+// ページ読み込み時に初期表示を 10:00 に設定
 updateDisplay();
 
 
