@@ -105,8 +105,7 @@ function playRandomBGM() {
   }
   
   //BGMボタンの表示を変える
-  toggleBgm.textContent = '■';
-  toggleBgm.style.fontSize = '1.8vh';  
+  toggleBgm.textContent = '⏹';
   videoElement.loop = true;
   videoElement.play();
 }
@@ -225,7 +224,6 @@ function fadeOutAudioElement(audioElement) {
 function stopAudioElementInternal(audioElement) {
   if (audioElement.id === bgmElement.id) {
     toggleBgm.textContent = '▶';
-    toggleBgm.style.fontSize = '1.5vh';
     // 動画停止・ループ解除はカウントダウン中でない場合のみ行う
     if (!countdownInterval) {
       videoElement.pause();
@@ -490,15 +488,13 @@ function changeover(toggle, boolean, vol, audioElement) {
   boolean = !boolean; // ON/OFF状態を反転
 
   if (boolean === false) {
-    toggle.textContent = 'off';
-    toggle.style.fontSize = '1.5vh';
-
+    toggle.textContent = 'OFF';
+    
     // フェードアウト関数を呼び出す
     fadeOutAudioElement(audioElement);  
   } else {
-    toggle.textContent = 'on';
-    toggle.style.fontSize = '1.5vh';
-
+    toggle.textContent = 'ON';
+    
     forestSounds(audioElement, boolean, vol);
   }
   
