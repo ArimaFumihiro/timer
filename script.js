@@ -7,15 +7,15 @@ let lastTickSecond = -1; // 前回「tick」を再生した秒数を記録
 let playedTracks = [];
 let currentTrackIndex = -1;
 let riverOn = true;
-let bardOn = true;
+let birdOn = true;
 let bgmVolume = 0.2;
 let riverVolume = 0.3;
-let bardVolume = 0.2;
+let birdVolume = 0.2;
 
 // 各オーディオ要素のフェードアウトInterval IDを保持する変数
 let bgmFadeInterval = null;
 let seRiverFadeInterval = null;
-let seBardFadeInterval = null;
+let sebirdFadeInterval = null;
 
 const timerDisplay = document.getElementById('timer'); //タイマー表示ディスプレイ
 const minutesButton1 = document.getElementById('minutes-button1'); //時間指定ボタン１
@@ -30,10 +30,10 @@ const videoElement = document.getElementById('video'); //動画要素を取得
 const bgmElement = document.getElementById('bgm'); // BGM要素を取得
 const seElement = document.getElementById('se'); // SE鳥の要素を取得
 const seRiverElement = document.getElementById('se_river'); // SE川の要素を取得
-const seBardElement = document.getElementById('se_bard'); // SE鳥の要素を取得
+const sebirdElement = document.getElementById('se_bird'); // SE鳥の要素を取得
 const toggleBgm = document.getElementById('toggle-bgm'); // BGM切り替えボタン
 const toggleRiver = document.getElementById('toggle-river'); // 川の音切り替えボタン
-const toggleBard = document.getElementById('toggle-bard'); // 鳥の音切り替えボタン
+const togglebird = document.getElementById('toggle-bird'); // 鳥の音切り替えボタン
 
 //BGMトラックリスト
 const bgmTracks = [
@@ -116,8 +116,8 @@ function forestSounds(audioElement, toggle, vol) {
   let seFadeInterval = null;
   if (audioElement.id === seRiverElement.id) {
     seFadeInterval = seRiverFadeInterval;
-  } else if (audioElement.id === seBardElement.id) {
-    seFadeInterval = seBardFadeInterval;
+  } else if (audioElement.id === sebirdElement.id) {
+    seFadeInterval = sebirdFadeInterval;
   }
 
   if (seFadeInterval !== null) {
@@ -125,8 +125,8 @@ function forestSounds(audioElement, toggle, vol) {
     // 対応するグローバル変数をnullに
     if (audioElement.id === seRiverElement.id) {
       seRiverFadeInterval = null;
-    } else if (audioElement.id === seBardElement.id) {
-      seBardFadeInterval = null;
+    } else if (audioElement.id === sebirdElement.id) {
+      sebirdFadeInterval = null;
     }
     
     audioElement.volume = vol; // 元のボリュームに戻す
@@ -153,7 +153,7 @@ function forestSounds(audioElement, toggle, vol) {
 function bgmSounds() {
   playRandomBGM(); // BGMをランダム再生
   forestSounds(seRiverElement, riverOn, riverVolume); //川の音を設定したvolumeで再生
-  forestSounds(seBardElement, bardOn, bardVolume); //鳥の音を設定したvolumeで再生
+  forestSounds(sebirdElement, birdOn, birdVolume); //鳥の音を設定したvolumeで再生
   videoElement.play();
 }
 
@@ -161,7 +161,7 @@ function bgmSounds() {
 function allFadeOut() {
   fadeOutAudioElement(bgmElement);
   fadeOutAudioElement(seRiverElement);
-  fadeOutAudioElement(seBardElement);
+  fadeOutAudioElement(sebirdElement);
 }
 
 const FADE_OUT_DURATION = 1500; // フェードアウトの時間 (ミリ秒)
@@ -175,9 +175,9 @@ function fadeOutAudioElement(audioElement) {
   } else if (audioElement.id === seRiverElement.id && seRiverFadeInterval) {
       clearInterval(seRiverFadeInterval);
       seRiverFadeInterval = null; // IDをクリア
-  } else if (audioElement.id === seBardElement.id && seBardFadeInterval) {
-      clearInterval(seBardFadeInterval);
-      seBardFadeInterval = null; // IDをクリア
+  } else if (audioElement.id === sebirdElement.id && sebirdFadeInterval) {
+      clearInterval(sebirdFadeInterval);
+      sebirdFadeInterval = null; // IDをクリア
   }
    
   let volume = audioElement.volume;
@@ -203,8 +203,8 @@ function fadeOutAudioElement(audioElement) {
         bgmFadeInterval = null;
       } else if (audioElement.id === seRiverElement.id) {
         seRiverFadeInterval = null;
-      } else if (audioElement.id === seBardElement.id) {
-        seBardFadeInterval = null;
+      } else if (audioElement.id === sebirdElement.id) {
+        sebirdFadeInterval = null;
       }
 
       stopAudioElementInternal(audioElement);
@@ -215,8 +215,8 @@ function fadeOutAudioElement(audioElement) {
     bgmFadeInterval = fadeOutInterval;
   } else if (audioElement.id === seRiverElement.id) {
     seRiverFadeInterval = fadeOutInterval;
-  } else if (audioElement.id === seBardElement.id) {
-    seBardFadeInterval = fadeOutInterval;
+  } else if (audioElement.id === sebirdElement.id) {
+    sebirdFadeInterval = fadeOutInterval;
   }
 }
 
@@ -238,8 +238,8 @@ function stopAudioElementInternal(audioElement) {
     audioElement.volume = bgmVolume;
   } else if (audioElement.id === seRiverElement.id) {
     audioElement.volume = riverVolume;
-  } else if (audioElement.id === seBardElement.id) {
-    audioElement.volume = bardVolume;
+  } else if (audioElement.id === sebirdElement.id) {
+    audioElement.volume = birdVolume;
   } else {
     // その他要素の場合はデフォルトの1に戻すなど
     audioElement.volume = 1;
@@ -320,13 +320,13 @@ function fadeOutStop() {
     seRiverElement.currentTime = 0; // 再生位置をリセット
     // === リセット処理ここまで ===
   }
-  if (seBardFadeInterval) {
-    clearInterval(seBardFadeInterval); // 停止！
-    seBardFadeInterval = null; // IDをクリア
+  if (sebirdFadeInterval) {
+    clearInterval(sebirdFadeInterval); // 停止！
+    sebirdFadeInterval = null; // IDをクリア
     // === 強制停止後のリセット処理 ===
-    seBardElement.volume = bardVolume; // ボリュームを初期値に戻す
-    seBardElement.pause(); // 停止
-    seBardElement.currentTime = 0; // 再生位置をリセット
+    sebirdElement.volume = birdVolume; // ボリュームを初期値に戻す
+    sebirdElement.pause(); // 停止
+    sebirdElement.currentTime = 0; // 再生位置をリセット
     // === リセット処理ここまで ===
   }
 }
@@ -339,7 +339,7 @@ startButton.addEventListener('click', () => {
   }
 
   // タイマー開始前に、全てのフェードアウトを強制停止
-  if (bgmFadeInterval !== null || seRiverFadeInterval !== null || seBardFadeInterval !== null) {
+  if (bgmFadeInterval !== null || seRiverFadeInterval !== null || sebirdFadeInterval !== null) {
     fadeOutStop(); // フェードアウト停止関数を呼び出し
   }
 
@@ -368,7 +368,7 @@ breakButton.addEventListener('click', () => {
   }
 
   // タイマー開始前に、全てのフェードアウトを強制停止
-  if (bgmFadeInterval !== null || seRiverFadeInterval !== null || seBardFadeInterval !== null) {
+  if (bgmFadeInterval !== null || seRiverFadeInterval !== null || sebirdFadeInterval !== null) {
     fadeOutStop(); // フェードアウト停止関数を呼び出し
   }
 
@@ -457,9 +457,9 @@ toggleRiver.addEventListener('click', () => {
   riverOn = changeover(toggleRiver, riverOn, riverVolume, seRiverElement);
 });
 //鳥の音をON,OFF
-toggleBard.addEventListener('click', () => {
+togglebird.addEventListener('click', () => {
   playSE('buttonClick');
-  bardOn = changeover(toggleBard, bardOn, bardVolume, seBardElement);
+  birdOn = changeover(togglebird, birdOn, birdVolume, sebirdElement);
 });
 
 //環境音SEをON,OFFする関数
@@ -467,8 +467,8 @@ function changeover(toggle, boolean, vol, audioElement) {
  let seFadeInterval = null;
  if (audioElement.id === seRiverElement.id) {
   seFadeInterval = seRiverFadeInterval;
- } else if (audioElement.id === seBardElement.id) {
-  seFadeInterval = seBardFadeInterval;
+ } else if (audioElement.id === sebirdElement.id) {
+  seFadeInterval = sebirdFadeInterval;
  }
 
  if (seFadeInterval !== null) {
@@ -476,8 +476,8 @@ function changeover(toggle, boolean, vol, audioElement) {
     // 対応するグローバル変数をnullに
     if (audioElement.id === seRiverElement.id) {
     seRiverFadeInterval = null;
-    } else if (audioElement.id === seBardElement.id) {
-    seBardFadeInterval = null;
+    } else if (audioElement.id === sebirdElement.id) {
+    sebirdFadeInterval = null;
     }
     // 強制停止されたら、ボリュームをON時の初期値に戻し、一旦停止する
     audioElement.volume = vol; // 元のボリュームに戻す
